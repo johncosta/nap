@@ -320,7 +320,10 @@ class ResourceModel(object):
         """
         tmp_obj = cls()
         url = tmp_obj._generate_url(url_type='collection', **lookup_vars)
-        response = tmp_obj._request('GET', url)
+
+        # GET requests should not have a content type
+        headers = tmp_obj.default_headers.pop('content-type', None)
+        response = tmp_obj._request('GET', url, headers=headers)
 
         tmp_obj.validate_collection_response(response)
 
