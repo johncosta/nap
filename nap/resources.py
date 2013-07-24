@@ -65,6 +65,7 @@ class ResourceModel(object):
         self._saved = False
         self.update_fields(kwargs)
         self.default_headers = {'content-type': 'application/json'}
+        self.default_headers.update(kwargs.pop('headers', {}))
 
     def update_fields(self, field_data):
         """Update object's values to values of field_data
