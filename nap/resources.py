@@ -64,6 +64,8 @@ class ResourceModel(object):
         self._root_url = kwargs.get('root_url', self._meta['root_url'])
         self._saved = False
         self.update_fields(kwargs)
+        self.default_headers = {'content-type': 'application/json'}
+        self.default_headers.update(kwargs.pop('headers', {}))
 
     def update_fields(self, field_data):
         """Update object's values to values of field_data
@@ -357,7 +359,8 @@ class ResourceModel(object):
 
         :param kwargs: keyword arguments passed to get_create_url
         """
-        headers = {'content-type': 'application/json'}
+        headers = self.default_headers
+        headers.update(kwargs.pop('headers', {}))
 
         url = self.get_update_url(**kwargs)
         if not url:
@@ -404,7 +407,8 @@ class ResourceModel(object):
 
         :param kwargs: keyword arguments passed to get_create_url
         """
-        headers = {'content-type': 'application/json'}
+        headers = self.default_headers
+        headers.update(kwargs.pop('headers', {}))
 
         response = self._request('POST', self.get_create_url(**kwargs),
             data=self.serialize(),
@@ -419,7 +423,8 @@ class ResourceModel(object):
 
         :param kwargs: keyword arguments passed to get_delete_url
         """
-        headers = {'content-type': 'application/json'}
+        headers = self.default_headers
+        headers.update(kwargs.pop('headers', {}))
 
         response = self._request('DELETE', self.get_delete_url(**kwargs),
             headers=headers)
