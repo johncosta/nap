@@ -64,8 +64,7 @@ class ResourceModel(object):
         self._root_url = kwargs.get('root_url', self._meta['root_url'])
         self._saved = False
         self.update_fields(kwargs)
-        self.default_headers = {'content-type': 'application/json'}
-        self.default_headers.update(kwargs.pop('headers', {}))
+        self.default_headers = kwargs.pop('headers', {})
 
     def update_fields(self, field_data):
         """Update object's values to values of field_data
@@ -157,6 +156,10 @@ class ResourceModel(object):
             root_url = self._meta['root_url']
         except KeyError:
             raise ValueError("Nap requests require root_url to be defined")
+
+        headers = kwargs.pop('headers', {})
+        headers.update(self.default_headers)
+        kwargs.update({'headers':headers})
 
         full_url = "%s%s" % (root_url, url)
         self.logger.info("Trying to hit %s" % full_url)
