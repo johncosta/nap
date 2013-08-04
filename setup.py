@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 
-test_requirements = ['mock', ]
+test_requirements = ['mock', 'pytest', 'pytest-cov']
 setup(
     name='nap',
     version="0.2.5",

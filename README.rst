@@ -1,6 +1,11 @@
 ===
 nap
 ===
+.. image:: https://travis-ci.org/jacobb/nap.png?branch=master
+   :target: https://travis-ci.org/jacobb/nap?branch=master
+
+.. image:: https://coveralls.io/repos/jacobb/nap/badge.png?branch=master
+   :target: https://coveralls.io/r/jacobb/nap/
 
 api access models and tools
 ===========================

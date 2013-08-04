@@ -1,0 +1,12 @@
+language: python
+python:
+  - "2.7"
+install:
+  - pip install slumber>=0.4.2
+  - pip install pytest-cov
+  - pip install coveralls
+script: make
+script:
+  py.test --cov nap --cov-report html
+after_success:
+  - coveralls
